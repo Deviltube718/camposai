@@ -1,4 +1,4 @@
-import { type NextRequest, NextResponse } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 
 export async function middleware(req: NextRequest) {
@@ -14,8 +14,6 @@ export async function middleware(req: NextRequest) {
       },
     }
   )
-
-  // Refresh token proactively to keep SSR pages authenticated
   await supabase.auth.getUser()
   return res
 }

@@ -1,8 +1,10 @@
-import { supabaseServer } from "@/lib/supabase/server";
+// src/app/app/page.tsx (or wherever this file lives)
+
+import { createClient } from "@/utils/supabase/server"; // ✅ new import
 import Link from "next/link";
 
 export default async function AppHome() {
-  const supabase = supabaseServer();
+  const supabase = await createClient(); // ✅ matches the import
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
